@@ -20,6 +20,7 @@
                 <configuration>
                     <repository>customer-service</repository>
                     <tag>${project.version}</tag>
+                    <dockerConfigFile>${project.basedir}/src/main/docker/Dockerfile</dockerConfigFile>
                     <buildArgs>
                         <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
