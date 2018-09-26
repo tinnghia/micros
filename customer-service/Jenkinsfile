@@ -10,7 +10,7 @@ node("master"){
             }
 
             stage("Login AWS Registry") {
-               sh "$(aws ecr get-login --no-include-email --region us-east-1)"
+                sh "$(aws ecr get-login --no-include-email --region us-east-1)"
             }
 
             stage("Build_Docker") {
