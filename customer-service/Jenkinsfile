@@ -9,9 +9,18 @@ node("master"){
                 checkout scm
             }
 
+            stage("Login AWS Registry") {
+               sh "$(aws ecr get-login --no-include-email --region us-east-1)"
+            }
+
             stage("Build_Docker") {
                 sh "mvn -f customer-service/pom.xml clean install dockerfile:build"
              }
+
+             stage("Push Image") {
+                sh "docker push 797508270758.dkr.ecr.us-east-1.amazonaws.com/my-repo/customer-service:1.0.0"
+             }
+
         }catch(e) {
             echo "FAILURE"
             currentBuild.result = "FAILURE"

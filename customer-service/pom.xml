@@ -22,7 +22,7 @@
                     <tag>${project.version}</tag>
                     <contextDirectory>${project.basedir}/src/main/docker/</contextDirectory>
                     <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        <JAR_FILE>${project.basedir}/target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                     <pullNewerImage>false</pullNewerImage>
                 </configuration>
