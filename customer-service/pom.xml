@@ -22,7 +22,7 @@
                     <tag>${project.version}</tag>
                     <contextDirectory>${project.basedir}/src/main/docker/</contextDirectory>
                     <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+                        <JAR_FILE>/var/lib/jenkins/workspace/micros-pipeline/customer-service/target/${project.build.finalName}.jar</JAR_FILE>
                     </buildArgs>
                     <pullNewerImage>false</pullNewerImage>
                 </configuration>
