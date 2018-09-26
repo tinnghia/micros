@@ -10,17 +10,16 @@ node("master"){
             }
 
             stage("Login AWS Registry") {
-                sh "$(aws ecr get-login --no-include-email --region us-east-1)"
+                sh "docker login -u AWS -p eyJwYXlsb2FkIjoiRVcyOGNOa0VQNHk3dXcyMjFQZ0x5UHBMUVN0cCtUMTJPRlJibEZYMWw4NnVDczBLM2svZmtOVm56T2x6S0VaUnA5WFM0SUhIYWw5ZVkrOFZXeTEyRitWTnZzZjE2YVNhSTF4NlMwaVFEeGt2TStHcDRXSlVXbWZkM1dRUzhmRU5XWmNWS3BTbXhndEZoQmtXVlY5a1FoQ2dNTFNQRzdRb29rdCs5UHc0SFY3SzVxNDk0cDJQY2NHbVdtQkx0OXBqVzYyVGlvSE9vNHFmcU02cy9IUEdUN1VYL3RQVDZMVkhBMkdJNXprSTlvNmhoV0NIcWhVK1pMQkQxYmduOFhwNitvL0ZsWWRpVnpDVUxLTGZ6ZlA3MUdwb3RxbmZCYk0xRmo3ZlRMM0lMNDhJL0JCN1VGWVhzRkF5NGkzTXFSWllsajhlR3dINURTMUJITmp1N3JDTXdZTFRhR1BCbncrYlVyVDd0S3BXRldsa1NjRFdXNmkzeU5qQkh1Wm9DdkhvaVlvb1hrbzdIcnR3bVNSNlFldzZCSVRNckY5VHVTZnhlRmJPN3NIWE05QlRoZm02d0hFMG80b0pWYlFqN0tlSEppOHRnQWJueTF2Nmx3cGNtcVBpa2tMeitXT2UySVg2SGpxbzVyLzB5d21TWldEYmRUaDQ0eitydWZVL1A4c2pvLzV0VWZpNGQyMFdlQmtOTTcvLytEMXA1NjVCdGhadG1VZ1dLNXV3bEg0NEhtWEQwMkpiMkFOYmNaVThmeVZIMUMwZyswa1VoVStQZXhCMVg0d1k4bjg1NkZwQ25tNUZnR2EwZ1BURHI5M1d4Q1lsWVRHR3pkbWZFSlYzRTIxOVNmazlraGlMTFVMVUpCNys4UUI5OUNjR21jN216cUozQkt1VVg5NzhGYWtzMFNnekphejlXcU8rWkhWZWgyTXRRWWN4eVNmTlRjTzNTSEh0OXFQSU5VTGk4TCt1cGQyV3hYbys4cFJuL1dSMDZJYzNuSXpCTXY4WE11UjVyeVlzMnJUazBpT3NFVnJXOVM2KyttV3NVY0M1RVoySTdhL1lXQUFwQUJLK0ZEYUR5cGt1bDNUTGxlTEFMY3N4TDJ4NCtOa24zM2dSM2hsdHBhR3lNbXk5VWhMbkhRMUR0VERBUnhCcTNhNGRnL0F0akZOdEdYNFAxeStCUlpDanZDakJFNzNaQ0VMbHlNSFd6cGxsQzVtTko1SnRXZ0xQbERlVWhjVERTS3RHa3NldnNqRVNvRk1KeU43QVVtKzlXOWhoVjN5QktlUktFKy9EMytoMmFXQzJ4dkVSSDNKeUFGM2NKRDFyYzdlUTNTcUsrTnVJcEd5SlJJQi9rQUloUEZWWWxCWGhFU0hxU2ZkY3MxeFA1YXRXei84bUxvczdHd2NvK3k3TFhZcXRBbjdtSmZURHc4ellRbEZUK0FvbUxpZEl0UlYrTm1aMXlqYjlBeWZRNWhSemZmMWJDb0dPaVE9PSIsImRhdGFrZXkiOiJBUUVCQUhod20wWWFJU0plUnRKbTVuMUc2dXFlZWtYdW9YWFBlNVVGY2U5UnE4LzE0d0FBQUg0d2ZBWUpLb1pJaHZjTkFRY0dvRzh3YlFJQkFEQm9CZ2txaGtpRzl3MEJCd0V3SGdZSllJWklBV1VEQkFFdU1CRUVETHNYbGpwa0w5MkFDQ1VkaWdJQkVJQTd2U2hYZlBDd3FNYXlrMjVzTG52UnFiZ0MxeE5WcXpKcHZKWTRGMDd2VnlSS0JNYUZGVDVpR2FPMFRRWGFDWnRKVnNUWExuV0dCZXRWRUtrPSIsInZlcnNpb24iOiIyIiwidHlwZSI6IkRBVEFfS0VZIiwiZXhwaXJhdGlvbiI6MTUzNzk5MDkwOX0= https://797508270758.dkr.ecr.us-east-1.amazonaws.com"
             }
 
             stage("Build_Docker") {
                 sh "mvn -f customer-service/pom.xml clean install dockerfile:build"
-             }
+            }
 
-             stage("Push Image") {
+            stage("Push Image") {
                 sh "docker push 797508270758.dkr.ecr.us-east-1.amazonaws.com/my-repo/customer-service:1.0.0"
-             }
-
+            }
         }catch(e) {
             echo "FAILURE"
             currentBuild.result = "FAILURE"
